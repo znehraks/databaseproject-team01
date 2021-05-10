@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
 import useInput from "../../components/Hooks/useInput";
@@ -57,7 +58,7 @@ const ListContainer = styled.div`
   align-items: center;
   padding-top: 0.8vw;
 `;
-const ListItem = styled.div`
+const ListItem = styled(Link)`
   width: 90%;
   height: 3vw;
   display: flex;
@@ -131,21 +132,36 @@ const EmpAdmin = withRouter(
               <SearchSpan>검색</SearchSpan>
             </SearchContainer>
             <ListContainer>
+              <ListItem>
+                <ListItemSpan>직원번호</ListItemSpan>
+                <ListItemSpan>직원이름</ListItemSpan>
+                {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
+                <ListItemSpan>최종학력</ListItemSpan>
+                <ListItemSpan>권한등급</ListItemSpan>
+                <ListItemSpan>부서번호</ListItemSpan>
+                <ListItemSpan>인사점수코드</ListItemSpan>
+                <ListItemSpan>관리직원번호</ListItemSpan>
+                <ListItemSpan>연봉</ListItemSpan>
+                <ListItemSpan>수정일자</ListItemSpan>
+              </ListItem>
               {data &&
                 data.map((item, index) => {
                   if ((index >= (page - 1) * 8) & (index < page * 8)) {
                     return (
-                      <ListItem>
+                      <ListItem to={`/EmpDetailAdmin/${item.emp_no}`}>
                         <ListItemSpan>{item.emp_no}</ListItemSpan>
                         <ListItemSpan>{item.emp_name}</ListItemSpan>
-                        <ListItemSpan>{item.emp_rrn}</ListItemSpan>
+                        {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
                         <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
                         <ListItemSpan>{item.emp_rank_no}</ListItemSpan>
                         <ListItemSpan>{item.dept_no}</ListItemSpan>
                         <ListItemSpan>{item.hr_score_history_no}</ListItemSpan>
                         <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
                         <ListItemSpan>{item.salary}</ListItemSpan>
-                        <ListItemSpan>{item.updated_at}</ListItemSpan>
+                        <ListItemSpan>
+                          {item.updated_at.split("T")[0]}-
+                          {item.updated_at.split("T")[1].split(".")[0]}
+                        </ListItemSpan>
                       </ListItem>
                     );
                   }

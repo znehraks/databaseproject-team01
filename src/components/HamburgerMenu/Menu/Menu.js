@@ -9,6 +9,11 @@ const Wrapper = styled.div`
   height: 108vh;
   background: #000;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 2vw;
 `;
 
 const Menu = ({ open, setOpen, ...props }) => {
@@ -22,7 +27,9 @@ const Menu = ({ open, setOpen, ...props }) => {
         aria-hidden={!isHidden}
         {...props}
       >
-        <Wrapper>아직 미구현</Wrapper>
+        <Wrapper>
+          <span>무엇을넣을까요</span>
+        </Wrapper>
       </StyledMenu>
     </>
   );

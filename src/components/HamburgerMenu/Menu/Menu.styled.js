@@ -6,6 +6,7 @@ export const StyledMenu = styled.nav`
   justify-content: center;
   align-content: center;
   border: none;
+  color: #fff;
   background-color: ${(props) => props.theme.bgColor};
   transform: ${({ open }) => (open ? "translateX(80vw)" : "translateX(110vw)")};
   width: 30vw;
@@ -25,7 +26,7 @@ export const StyledMenu = styled.nav`
     padding: 1vw 1.5vw;
     font-weight: 500;
     letter-spacing: 0.5vw;
-    color: ${(props) => props.theme.pointColor};
+    color: #fff;
     text-decoration: none;
     transition: color 0.3s linear;
     &:hover {

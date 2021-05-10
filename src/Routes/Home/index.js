@@ -44,9 +44,11 @@ const ContentSpan = styled(Link)`
   margin-top: 1vw;
   font-size: 1.2vw;
   font-weight: 500;
+  color: #666;
   :hover {
-    color: #777;
+    color: #000;
     font-weight: 800;
+    font-style: italic;
   }
 `;
 
@@ -60,14 +62,35 @@ const Home = () => {
           <ContentSpan to="/EmpAdmin/career">직원이력관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/dept">직원부서변동관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/salary">직원급여관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
-        <TitleSpan to="/ProjectAdmin">프로젝트관리</TitleSpan>
+        <TitleSpan to="/ProjectAdmin/main">프로젝트관리</TitleSpan>
         <ContentContainer>
           <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원부서변동관리</ContentSpan>
           <ContentSpan>직원급여관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
@@ -76,6 +99,17 @@ const Home = () => {
           <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원부서변동관리</ContentSpan>
           <ContentSpan>직원급여관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
@@ -84,6 +118,17 @@ const Home = () => {
           <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원부서변동관리</ContentSpan>
           <ContentSpan>직원급여관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
     </Wrapper>
