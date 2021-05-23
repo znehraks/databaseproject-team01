@@ -6,6 +6,7 @@ import emp_detail from "../Routes/EmpAdmin/emp_detail";
 import ProjectAdmin from "../Routes/ProjectAdmin";
 import project_detail from "../Routes/ProjectAdmin/project_detail.js";
 import ClientAdmin from "../Routes/ClientAdmin";
+import DepartmentAdmin from "../Routes/req01/DepartmentAdmin";
 import Auth from "../Routes/Auth";
 
 const Routes = () => {
@@ -20,6 +21,7 @@ const Routes = () => {
         component={emp_detail}
       ></Route>
       <Route exact path="/ProjectAdmin/:mode" component={ProjectAdmin}></Route>
+      <Route exact path="/DepartmentAdmin" component={DepartmentAdmin}></Route>
       <Route
         exact
         path="/ProjectDetailAdmin/:project_no"

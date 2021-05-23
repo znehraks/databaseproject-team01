@@ -62,7 +62,7 @@ const Home = () => {
           <ContentSpan to="/EmpAdmin/career">직원이력관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/dept">직원부서변동관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/salary">직원급여관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan to="/DepartmentAdmin">부서 관리</ContentSpan>
           <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원이력관리</ContentSpan>

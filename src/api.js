@@ -10,4 +10,6 @@ export const Api = {
   getProjectInfo: () => api.get(`/api/project`),
   getEmployeeInProjectInfo: (project_no) =>
     api.get(`/api/employee_in_project/${project_no}`),
+  getDepartments: () => api.get("api/req01/by_salary"),
+  getDepartmentEmployee: (department) => api.get(`api/req02/by_dept_name/${department}`)
 };
