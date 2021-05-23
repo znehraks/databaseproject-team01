@@ -7,6 +7,9 @@ import ProjectAdmin from "../Routes/ProjectAdmin";
 import project_detail from "../Routes/ProjectAdmin/project_detail.js";
 import ClientAdmin from "../Routes/ClientAdmin";
 import DepartmentAdmin from "../Routes/req01/DepartmentAdmin";
+import req07 from "../Routes/req07";
+import Req08 from "../Routes/req08";
+import Req08Detail from "../Routes/req08/Detail";
 import Auth from "../Routes/Auth";
 
 const Routes = () => {
@@ -28,6 +31,13 @@ const Routes = () => {
         component={project_detail}
       ></Route>
       <Route exact path="/ClientAdmin" component={ClientAdmin}></Route>
+      <Route exact path="/ProjectProceeding" component={req07}></Route>
+      <Route exact path="/ProjectArrange" component={Req08}></Route>
+      <Route
+        exact
+        path="/ProjectArrangeDetail/:emp_no"
+        component={Req08Detail}
+      ></Route>
       <Redirect from="*" to="/" />
     </Switch>
   );

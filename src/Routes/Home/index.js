@@ -63,71 +63,26 @@ const Home = () => {
           <ContentSpan to="/EmpAdmin/dept">직원부서변동관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/salary">직원급여관리</ContentSpan>
           <ContentSpan to="/DepartmentAdmin">부서 관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
         <TitleSpan to="/ProjectAdmin/main">프로젝트관리</TitleSpan>
         <ContentContainer>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원부서변동관리</ContentSpan>
-          <ContentSpan>직원급여관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
+          <ContentSpan to="/ProjectArrange">프로젝트 열람</ContentSpan>
+          <ContentSpan to="/ProjectProceeding">
+            프로젝트 별 투입 직원 열람
+          </ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
         <TitleSpan to="/ClientAdmin">발주처관리</TitleSpan>
         <ContentContainer>
           <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원부서변동관리</ContentSpan>
-          <ContentSpan>직원급여관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
         <TitleSpan to="/">포털관리자관리</TitleSpan>
         <ContentContainer>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원부서변동관리</ContentSpan>
-          <ContentSpan>직원급여관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
-          <ContentSpan>직원이력관리</ContentSpan>
           <ContentSpan>직원이력관리</ContentSpan>
         </ContentContainer>
       </Article>
