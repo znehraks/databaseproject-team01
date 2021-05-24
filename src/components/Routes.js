@@ -8,8 +8,11 @@ import project_detail from "../Routes/ProjectAdmin/project_detail.js";
 import ClientAdmin from "../Routes/ClientAdmin";
 import DepartmentAdmin from "../Routes/req01/DepartmentAdmin";
 import req07 from "../Routes/req07";
-import Req08 from "../Routes/req08";
 import Req08Detail from "../Routes/req08/Detail";
+import Req08 from "../Routes/req08";
+import Req09 from "../Routes/req09";
+import Req09Detail from "../Routes/req09/Detail";
+import Req10 from "../Routes/req10";
 import Auth from "../Routes/Auth";
 
 const Routes = () => {
@@ -38,6 +41,14 @@ const Routes = () => {
         path="/ProjectArrangeDetail/:emp_no"
         component={Req08Detail}
       ></Route>
+
+      <Route exact path="/ProjectPMPL" component={Req09}></Route>
+      <Route
+        exact
+        path="/ProjectPMPLDetail/:emp_no"
+        component={Req09Detail}
+      ></Route>
+      <Route exact path="/EmpSalary" component={Req10}></Route>
       <Redirect from="*" to="/" />
     </Switch>
   );

@@ -61,16 +61,21 @@ const Home = () => {
           <ContentSpan to="/EmpAdmin/rank">직원권한등급관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/career">직원이력관리</ContentSpan>
           <ContentSpan to="/EmpAdmin/dept">직원부서변동관리</ContentSpan>
-          <ContentSpan to="/EmpAdmin/salary">직원급여관리</ContentSpan>
+          <ContentSpan to="/EmpSalary">직원급여관리(요구사항10번)</ContentSpan>
           <ContentSpan to="/DepartmentAdmin">부서 관리</ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
         <TitleSpan to="/ProjectAdmin/main">프로젝트관리</TitleSpan>
         <ContentContainer>
-          <ContentSpan to="/ProjectArrange">프로젝트 열람</ContentSpan>
+          <ContentSpan to="/ProjectArrange">
+            프로젝트 커스텀 정렬 열람(요구사항8번)
+          </ContentSpan>
           <ContentSpan to="/ProjectProceeding">
-            프로젝트 별 투입 직원 열람
+            프로젝트 별 투입 직원 열람(요구사항7번)
+          </ContentSpan>
+          <ContentSpan to="/ProjectPMPL">
+            프로젝트 별 해당 직원의 PM, PL 열람(요구사항9번)
           </ContentSpan>
         </ContentContainer>
       </Article>

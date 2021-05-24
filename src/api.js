@@ -29,4 +29,10 @@ export const Api = {
     api.get(`api/req08/imminent_project/${emp_no}`),
   getProjectLongtime: (emp_no) =>
     api.get(`api/req08/longtime_project/${emp_no}`),
+
+  //req09
+  getProjectPMPL: (emp_no) => api.get(`api/req09/${emp_no}`),
+
+  //req10
+  updateSalaryByPER: () => api.get(`api/req10`),
 };
