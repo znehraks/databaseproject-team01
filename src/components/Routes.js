@@ -13,6 +13,14 @@ import Req08 from "../Routes/req08";
 import Req09 from "../Routes/req09";
 import Req09Detail from "../Routes/req09/Detail";
 import Req10 from "../Routes/req10";
+import Emp from "../Routes/req00/Emp";
+import Project from "../Routes/req00/Project";
+import Department from "../Routes/req00/Department";
+import Client from "../Routes/req00/Client";
+import ProjectPosition from "../Routes/req00/ProjectPosition";
+import EmpOnlineAccount from "../Routes/req00/EmpOnlineAccount";
+import EmployeeInProject from "../Routes/req00/EmployeeInProject";
+import PerformanceEvaluationResume from "../Routes/req00/PerformanceEvaluationResume";
 import Auth from "../Routes/Auth";
 
 const Routes = () => {
@@ -49,6 +57,28 @@ const Routes = () => {
         component={Req09Detail}
       ></Route>
       <Route exact path="/EmpSalary" component={Req10}></Route>
+
+      {/*기본 요구사항 라우트 */}
+      <Route exact path="/Emp" component={Emp}></Route>
+      <Route exact path="/Project" component={Project}></Route>
+      <Route exact path="/Department" component={Department}></Route>
+      <Route exact path="/Client" component={Client}></Route>
+      <Route exact path="/ProjectPosition" component={ProjectPosition}></Route>
+      <Route
+        exact
+        path="/EmpOnlineAccount"
+        component={EmpOnlineAccount}
+      ></Route>
+      <Route
+        exact
+        path="/EmployeeInProject"
+        component={EmployeeInProject}
+      ></Route>
+      <Route
+        exact
+        path="/PerformanceEvaluationResume"
+        component={PerformanceEvaluationResume}
+      ></Route>
       <Redirect from="*" to="/" />
     </Switch>
   );
