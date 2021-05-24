@@ -83,10 +83,10 @@ const Home = () => {
         <TitleSpan to="/ClientAdmin">기본관리</TitleSpan>
         <ContentContainer>
           <ContentSpan to="/Emp">직원 기본관리(구현됨)</ContentSpan>
-          <ContentSpan to="/Project">프로젝트 기본관리</ContentSpan>
-          <ContentSpan to="/Department">부서 기본관리</ContentSpan>
-          <ContentSpan to="/Client">발주처 기본관리</ContentSpan>
-          <ContentSpan to="/ProjectPosition">직무 기본관리</ContentSpan>
+          <ContentSpan to="/Project">프로젝트 기본관리(구현됨)</ContentSpan>
+          <ContentSpan to="/Department">부서 기본관리(구현됨)</ContentSpan>
+          <ContentSpan to="/Client">발주처 기본관리(구현됨)</ContentSpan>
+          <ContentSpan to="/Task">직무 기본관리(구현됨)</ContentSpan>
           <ContentSpan to="/EmpOnlineAccount">
             직원 포털회원 기본관리(구현됨)
           </ContentSpan>

@@ -89,25 +89,104 @@ export const Api = {
 
   //Project -read
   //위의 getProjectInfo와 동일하므로 생략
+
   //Project -insert
+  addProject: (project_name, client_no) =>
+    api.post(`api/req01/project/add`, {
+      project_name,
+      client_no,
+    }),
+
   //Project -update
+  updateProject: (
+    project_no,
+    project_name,
+    project_startdate,
+    project_enddate,
+    client_no,
+    storage_period
+  ) =>
+    api.post(`api/req01/project/edit/`, {
+      project_no,
+      project_name,
+      project_startdate,
+      project_enddate,
+      client_no,
+      storage_period,
+    }),
+
   //Project -delete
+  deleteProject: (project_no) =>
+    api.get(`api/req01/project/delete/${project_no}`),
 
   //Department -read
-  //위의 getDepartments와 동일하므로 생략
+  getDepartments_: () => api.get(`api/req01/department`),
+
   //Department -insert
+  addDepartment: (name) => api.post(`api/req01/department/add`, { name }),
+
   //Department -update
+  updateDepartment: (name, dept_no) =>
+    api.post(`api/req01/department/edit`, { name, dept_no }),
+
   //Department -delete
+  deleteDepartment: (dept_no) =>
+    api.get(`api/req01/department/delete/${dept_no}`),
 
   //Client -read
-  //Client -insert
-  //Client -update
-  //Client -delete
+  getClients: () => api.get(`api/req01/client`),
 
-  //ProjectPosition -read
-  //ProjectPosition -insert
-  //ProjectPosition -update
-  //ProjectPosition -delete
+  //Client -insert
+  addClient: (client_name) => api.post(`api/req01/client/add`, { client_name }),
+
+  //Client -update
+  updateClient: (client_name, client_no) =>
+    api.post(`api/req01/client/edit`, { client_name, client_no }),
+
+  //Client -delete
+  deleteClient: (client_no) => api.get(`api/req01/client/delete/${client_no}`),
+
+  //Task -read
+  getTasks: () => api.get(`api/req01/task`),
+
+  //Task -insert
+  addTask: (name) => api.post(`api/req01/task/add`, { name }),
+
+  //Task -update
+  updateTask: (role_no, name) =>
+    api.post(`api/req01/task/edit`, { name, role_no }),
+
+  //Task -delete
+  deleteTask: (role_no) => api.get(`api/req01/task/delete/${role_no}`),
+
+  //EmployeeGrade -read
+  getEmployeeGrade: () => api.get(`api/req01/employee_grade`),
+
+  //EmployeeGrade -insert
+  addEmployeeGrade: (emp_rank_name, modify_access, read_access) =>
+    api.post(`api/req01/employee_grade/add`, {
+      emp_rank_name,
+      modify_access,
+      read_access,
+    }),
+
+  //EmployeeGrade -update
+  updateEmployeeGrade: (
+    emp_rank_name,
+    modify_access,
+    read_access,
+    emp_rank_no
+  ) =>
+    api.post(`api/req01/employee_grade/edit`, {
+      emp_rank_name,
+      modify_access,
+      read_access,
+      emp_rank_no,
+    }),
+
+  //EmployeeGrade -delete
+  deleteEmployeeGrade: (emp_rank_no) =>
+    api.get(`api/req01/employee_grade/delete/${emp_rank_no}`),
 
   //EmpOnlineAccount -read
   getEmpOnlineAccounts: () => api.get(`api/req00/emp_online_account`),

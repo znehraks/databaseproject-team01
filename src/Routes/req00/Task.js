@@ -132,29 +132,21 @@ const Req08 = () => {
   const [page, setPage] = useState(1);
   const [current, setCurrent] = useState();
   const [trigger, setTrigger] = useState(false);
-  const project_name = useInput();
-  const project_startdate = useInput();
-  const project_enddate = useInput();
-  const client_no = useInput();
-  const storage_period = useInput();
+  const role_name = useInput();
 
   useEffect(() => {
-    Api.getProjectInfo().then((response) => {
+    Api.getTasks().then((response) => {
       setData(response.data);
       console.log(response);
       console.log(response.data);
     });
     if (mode === "insert") {
-      project_name.setValue("");
-      project_startdate.setValue("");
-      project_enddate.setValue("");
-      client_no.setValue("");
-      storage_period.setValue("");
+      role_name.setValue("");
     }
   }, [trigger, mode]);
 
-  const insertData = (project_name, client_no) => {
-    Api.addProject(project_name, client_no).then((response) => {
+  const insertData = (role_name) => {
+    Api.addTask(role_name).then((response) => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
@@ -163,22 +155,8 @@ const Req08 = () => {
       }
     });
   };
-  const updateData = (
-    project_no,
-    project_name,
-    project_startdate,
-    project_enddate,
-    client_no,
-    storage_period
-  ) => {
-    Api.updateProject(
-      project_no,
-      project_name,
-      project_startdate,
-      project_enddate,
-      client_no,
-      storage_period
-    ).then((response) => {
+  const updateData = (role_no, role_name) => {
+    Api.updateTask(role_no, role_name).then((response) => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
@@ -187,8 +165,8 @@ const Req08 = () => {
       }
     });
   };
-  const deleteData = (project_no) => {
-    Api.deleteProject(project_no).then((response) => {
+  const deleteData = (role_no) => {
+    Api.deleteTask(role_no).then((response) => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
@@ -219,12 +197,8 @@ const Req08 = () => {
           </SearchContainer>
           <ListContainer>
             <ListItem>
-              <ListItemSpan>프로젝트번호</ListItemSpan>
-              <ListItemSpan>프로젝트이름</ListItemSpan>
-              <ListItemSpan>프로젝트착수일자</ListItemSpan>
-              <ListItemSpan>프로젝트종료일자</ListItemSpan>
-              <ListItemSpan>발주처번호</ListItemSpan>
-              <ListItemSpan>열람가능기간</ListItemSpan>
+              <ListItemSpan>직무번호</ListItemSpan>
+              <ListItemSpan>직무이름</ListItemSpan>
               <ListItemSpan>수정일자</ListItemSpan>
               <ListItemSpan>삭제</ListItemSpan>
             </ListItem>
@@ -236,34 +210,14 @@ const Req08 = () => {
                       <ListItemSpan
                         onClick={() => {
                           setMode("update");
-                          project_name.setValue(item.project_name);
-                          project_startdate.setValue(item.project_startdate);
-                          project_enddate.setValue(item.project_enddate);
-                          client_no.setValue(item.client_no);
-                          storage_period.setValue(item.storage_period);
+                          role_name.setValue(item.role_name);
 
                           setCurrent(item);
                         }}
                       >
-                        {item.project_no}
+                        {item.role_no}
                       </ListItemSpan>
-                      <ListItemSpan>{item.project_name}</ListItemSpan>
-                      <ListItemSpan>
-                        {item.project_startdate.split("T")[0]}
-                      </ListItemSpan>
-                      <ListItemSpan>
-                        {item.project_enddate
-                          ? `
-                            ${item.project_enddate.split("T")[0]}`
-                          : ``}
-                      </ListItemSpan>
-                      <ListItemSpan>{item.client_no}</ListItemSpan>
-                      <ListItemSpan>
-                        {item.storage_period
-                          ? `
-                            ${item.storage_period.split("T")[0]}`
-                          : ``}
-                      </ListItemSpan>
+                      <ListItemSpan>{item.role_name}</ListItemSpan>
                       <ListItemSpan>
                         {item.updated_at.split("T")[0]}-
                         {item.updated_at.split("T")[1].split(".")[0]}
@@ -271,7 +225,7 @@ const Req08 = () => {
                       <ListItemSpan>
                         <SubmitButton
                           onClick={() => {
-                            deleteData(item.project_no);
+                            deleteData(item.role_no);
                           }}
                         >
                           삭제하기
@@ -330,23 +284,12 @@ const Req08 = () => {
           </SearchContainer>
           <ListContainer>
             <SearchContainerColumn>
-              프로젝트이름 <SearchBar {...project_name}></SearchBar>
-              프로젝트착수일자 <SearchBar {...project_startdate}></SearchBar>
-              프로젝트종료일자 <SearchBar {...project_enddate}></SearchBar>
-              발주처번호 <SearchBar {...client_no}></SearchBar>
-              보관기간 <SearchBar {...storage_period}></SearchBar>
+              직무이름 <SearchBar {...role_name}></SearchBar>
             </SearchContainerColumn>
           </ListContainer>
           <SubmitButton
             onClick={() => {
-              updateData(
-                current.project_no,
-                project_name.value,
-                project_startdate.value,
-                project_enddate.value,
-                client_no.value,
-                storage_period.value
-              );
+              updateData(current.role_no, role_name.value);
               setMode("read");
             }}
           >
@@ -375,13 +318,12 @@ const Req08 = () => {
           </SearchContainer>
           <ListContainer>
             <SearchContainerColumn>
-              프로젝트이름 <SearchBar {...project_name}></SearchBar>
-              발주처번호 <SearchBar {...client_no}></SearchBar>
+              직무이름 <SearchBar {...role_name}></SearchBar>
             </SearchContainerColumn>
           </ListContainer>
           <SubmitButton
             onClick={() => {
-              insertData(project_name.value, client_no.value);
+              insertData(role_name.value);
               setMode("read");
             }}
           >

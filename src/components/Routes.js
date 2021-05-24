@@ -17,7 +17,7 @@ import Emp from "../Routes/req00/Emp";
 import Project from "../Routes/req00/Project";
 import Department from "../Routes/req00/Department";
 import Client from "../Routes/req00/Client";
-import ProjectPosition from "../Routes/req00/ProjectPosition";
+import Task from "../Routes/req00/Task";
 import EmpOnlineAccount from "../Routes/req00/EmpOnlineAccount";
 import EmployeeInProject from "../Routes/req00/EmployeeInProject";
 import PerformanceEvaluationResume from "../Routes/req00/PerformanceEvaluationResume";
@@ -63,7 +63,7 @@ const Routes = () => {
       <Route exact path="/Project" component={Project}></Route>
       <Route exact path="/Department" component={Department}></Route>
       <Route exact path="/Client" component={Client}></Route>
-      <Route exact path="/ProjectPosition" component={ProjectPosition}></Route>
+      <Route exact path="/Task" component={Task}></Route>
       <Route
         exact
         path="/EmpOnlineAccount"

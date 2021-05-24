@@ -1,5 +1,6 @@
+import { Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
+import { Redirect, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
@@ -20,6 +21,15 @@ const SearchContainer = styled.div`
   height: 10vw;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+`;
+const SearchContainerColumn = styled.div`
+  width: 100%;
+  height: 30vw;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -109,102 +119,218 @@ const Next = styled.span`
 const Blank = styled.div`
   flex: 1;
 `;
+
+const SubmitButton = styled.div`
+  font-size: 2vw;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 5vw;
+`;
 const Req08 = () => {
   const [data, setData] = useState();
-  const [orderBy, setOrderBy] = useState("recent");
-  const [empNo, setEmpNo] = useState();
+  const [mode, setMode] = useState("read");
   const [page, setPage] = useState(1);
-  const search = useInput();
+  const [current, setCurrent] = useState();
+  const [trigger, setTrigger] = useState(false);
+  const name = useInput();
+
   useEffect(() => {
-    Api.getReq08().then((response) => {
+    Api.getDepartments_().then((response) => {
       setData(response.data);
       console.log(response);
       console.log(response.data);
     });
-  }, [orderBy]);
-  //   useEffect(() => {
-  //     Api.getEmpInfo().then((response) => {
-  //       setData(response.data);
-  //       console.log(response.data);
-  //     });
-  //   }, []);
+    if (mode === "insert") {
+      name.setValue("");
+    }
+  }, [trigger, mode]);
+
+  const insertData = (name) => {
+    Api.addDepartment(name).then((response) => {
+      if (response.status === 200) {
+        console.log("no err");
+        setTrigger(!trigger);
+      } else {
+        alert("잠시 후 다시 시도해 주세요");
+      }
+    });
+  };
+  const updateData = (name, dept_no) => {
+    Api.updateDepartment(name, dept_no).then((response) => {
+      if (response.status === 200) {
+        console.log("no err");
+        setTrigger(!trigger);
+      } else {
+        alert("잠시 후 다시 시도해 주세요");
+      }
+    });
+  };
+  const deleteData = (dept_no) => {
+    Api.deleteDepartment(dept_no).then((response) => {
+      if (response.status === 200) {
+        console.log("no err");
+        setTrigger(!trigger);
+      } else {
+        alert("잠시 후 다시 시도해 주세요");
+      }
+    });
+  };
   return (
     <>
-      <Wrapper>
-        <SearchContainer>
-          <SearchBar placeholder={"검색어 입력"} {...search}></SearchBar>
-          <SearchSpan>검색</SearchSpan>
-        </SearchContainer>
-        <ListContainer>
-          <ListItem>
-            <ListItemSpan>직원번호</ListItemSpan>
-            <ListItemSpan>프로젝트번호</ListItemSpan>
-            <ListItemSpan flex={2}>프로젝트이름</ListItemSpan>
-            <ListItemSpan>착수일자</ListItemSpan>
-            <ListItemSpan>직원투입일자</ListItemSpan>
-            <ListItemSpan>직원철수일자</ListItemSpan>
-            <ListItemSpan>철수사유코드</ListItemSpan>
-            <ListItemSpan>발주처번호</ListItemSpan>
-            <ListItemSpan>열람가능기한</ListItemSpan>
-            <ListItemSpan>수정일자</ListItemSpan>
-          </ListItem>
-          {data &&
-            data.map((item, index) => {
-              if ((index >= (page - 1) * 8) & (index < page * 8)) {
-                return (
-                  <ListItem to={`/ProjectArrangeDetail/${item.emp_no}`}>
-                    <ListItemSpan>{item.emp_no}</ListItemSpan>
-                    <ListItemSpan>{item.project_no}</ListItemSpan>
-                    <ListItemSpan flex={2}>{item.project_name}</ListItemSpan>
-                    <ListItemSpan>
-                      {item.project_startdate.split("T")[0]}
-                    </ListItemSpan>
-                    <ListItemSpan>{item.enter_date.split("T")[0]}</ListItemSpan>
-                    <ListItemSpan>
-                      {item.finish_date
-                        ? `${item.finish_date.split("T")[0]}`
-                        : ``}
-                    </ListItemSpan>
-                    <ListItemSpan>{item.finish_reason}</ListItemSpan>
-                    <ListItemSpan>{item.client_no}</ListItemSpan>
-                    <ListItemSpan>
-                      {item.storage_period.split("T")[0]}
-                    </ListItemSpan>
-                    <ListItemSpan>
-                      {item.updated_at.split("T")[0]}-
-                      {item.updated_at.split("T")[1].split(".")[0]}
-                    </ListItemSpan>
-                  </ListItem>
-                );
-              }
-            })}
-        </ListContainer>
-        <ButtonContainer>
-          <Prev
+      {mode === "read" && (
+        <Wrapper>
+          <SearchContainer>
+            <SearchSpan
+              onClick={() => {
+                setMode("read");
+              }}
+            >
+              조회
+            </SearchSpan>
+            <SearchSpan
+              onClick={() => {
+                setMode("insert");
+              }}
+            >
+              추가
+            </SearchSpan>
+          </SearchContainer>
+          <ListContainer>
+            <ListItem>
+              <ListItemSpan>부서번호</ListItemSpan>
+              <ListItemSpan>부서이름</ListItemSpan>
+              <ListItemSpan>수정일자</ListItemSpan>
+              <ListItemSpan>삭제</ListItemSpan>
+            </ListItem>
+            {data &&
+              data.map((item, index) => {
+                if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                  return (
+                    <ListItem>
+                      <ListItemSpan
+                        onClick={() => {
+                          setMode("update");
+                          name.setValue(item.dept_name);
+
+                          setCurrent(item);
+                        }}
+                      >
+                        {item.dept_no}
+                      </ListItemSpan>
+                      <ListItemSpan>{item.dept_name}</ListItemSpan>
+                      <ListItemSpan>
+                        {item.updated_at.split("T")[0]}-
+                        {item.updated_at.split("T")[1].split(".")[0]}
+                      </ListItemSpan>
+                      <ListItemSpan>
+                        <SubmitButton
+                          onClick={() => {
+                            deleteData(item.dept_no);
+                          }}
+                        >
+                          삭제하기
+                        </SubmitButton>
+                      </ListItemSpan>
+                    </ListItem>
+                  );
+                }
+              })}
+          </ListContainer>
+          <ButtonContainer>
+            <Prev
+              onClick={() => {
+                if (page < 2) {
+                  alert("첫 번째 페이지 입니다.");
+                  return;
+                }
+                setPage(page - 1);
+              }}
+            >
+              이전
+            </Prev>
+            <CurrentPage>{page}</CurrentPage>
+            <Next
+              onClick={() => {
+                if (Math.floor(data.length / 8) + 1 === page) {
+                  alert("마지막 페이지 입니다.");
+                  return;
+                }
+                setPage(page + 1);
+              }}
+            >
+              다음
+            </Next>
+          </ButtonContainer>
+        </Wrapper>
+      )}
+
+      {mode === "update" && (
+        <Wrapper>
+          <SearchContainer>
+            <SearchSpan
+              onClick={() => {
+                setMode("read");
+              }}
+            >
+              조회
+            </SearchSpan>
+            <SearchSpan
+              onClick={() => {
+                setMode("insert");
+              }}
+            >
+              추가
+            </SearchSpan>
+          </SearchContainer>
+          <ListContainer>
+            <SearchContainerColumn>
+              부서이름 <SearchBar {...name}></SearchBar>
+            </SearchContainerColumn>
+          </ListContainer>
+          <SubmitButton
             onClick={() => {
-              if (page < 2) {
-                alert("첫 번째 페이지 입니다.");
-                return;
-              }
-              setPage(page - 1);
+              updateData(name.value, current.dept_no);
+              setMode("read");
             }}
           >
-            이전
-          </Prev>
-          <CurrentPage>{page}</CurrentPage>
-          <Next
+            완료
+          </SubmitButton>
+        </Wrapper>
+      )}
+
+      {mode === "insert" && (
+        <Wrapper>
+          <SearchContainer>
+            <SearchSpan
+              onClick={() => {
+                setMode("read");
+              }}
+            >
+              조회
+            </SearchSpan>
+            <SearchSpan
+              onClick={() => {
+                setMode("insert");
+              }}
+            >
+              추가
+            </SearchSpan>
+          </SearchContainer>
+          <ListContainer>
+            <SearchContainerColumn>
+              부서이름 <SearchBar {...name}></SearchBar>
+            </SearchContainerColumn>
+          </ListContainer>
+          <SubmitButton
             onClick={() => {
-              if (Math.floor(data.length / 8) + 1 === page) {
-                alert("마지막 페이지 입니다.");
-                return;
-              }
-              setPage(page + 1);
+              insertData(name.value);
+              setMode("read");
             }}
           >
-            다음
-          </Next>
-        </ButtonContainer>
-      </Wrapper>
+            완료
+          </SubmitButton>
+        </Wrapper>
+      )}
     </>
   );
 };
