@@ -7,7 +7,11 @@ import ProjectAdmin from "../Routes/ProjectAdmin";
 import project_detail from "../Routes/ProjectAdmin/project_detail.js";
 import ClientAdmin from "../Routes/ClientAdmin";
 import DepartmentAdmin from "../Routes/req01/DepartmentAdmin";
-import req07 from "../Routes/req07";
+import Req03 from "../Routes/req03";
+import Req04 from "../Routes/req04";
+import Req05 from "../Routes/req05";
+import Req06 from "../Routes/req06";
+import req07 from "../Routes/req03";
 import Req08Detail from "../Routes/req08/Detail";
 import Req08 from "../Routes/req08";
 import Req09 from "../Routes/req09";
@@ -42,6 +46,12 @@ const Routes = () => {
         component={project_detail}
       ></Route>
       <Route exact path="/ClientAdmin" component={ClientAdmin}></Route>
+
+      <Route exact path="/Req03" component={Req03}></Route>
+      <Route exact path="/Req04" component={Req04}></Route>
+      <Route exact path="/Req05" component={Req05}></Route>
+      <Route exact path="/Req06" component={Req06}></Route>
+
       <Route exact path="/ProjectProceeding" component={req07}></Route>
       <Route exact path="/ProjectArrange" component={Req08}></Route>
       <Route
@@ -79,6 +89,7 @@ const Routes = () => {
         path="/PerformanceEvaluationResume"
         component={PerformanceEvaluationResume}
       ></Route>
+
       <Redirect from="*" to="/" />
     </Switch>
   );

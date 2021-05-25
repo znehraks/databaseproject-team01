@@ -56,13 +56,20 @@ const Home = () => {
   return (
     <Wrapper>
       <Article>
-        <TitleSpan to="/EmpAdmin/main">직원관리</TitleSpan>
+        <TitleSpan>요구사항관리</TitleSpan>
         <ContentContainer>
-          <ContentSpan to="/EmpAdmin/rank">직원권한등급관리</ContentSpan>
-          <ContentSpan to="/EmpAdmin/career">직원이력관리</ContentSpan>
-          <ContentSpan to="/EmpAdmin/dept">직원부서변동관리</ContentSpan>
+          <ContentSpan to="/Req03">
+            PM,PL보너스지급관리(요구사항3번)
+          </ContentSpan>
+          <ContentSpan to="/Req04">
+            직원투입프로젝트 및 직무 관리(요구사항4번)
+          </ContentSpan>
+          <ContentSpan to="/Req05">발주처 정보조회(요구사항5번)</ContentSpan>
+          <ContentSpan to="/Req06">사수정보관리(요구사항6번)</ContentSpan>
           <ContentSpan to="/EmpSalary">직원급여관리(요구사항10번)</ContentSpan>
-          <ContentSpan to="/DepartmentAdmin">부서 관리</ContentSpan>
+          <ContentSpan to="/DepartmentAdmin">
+            부서 관리(요구사항1번,2번)
+          </ContentSpan>
         </ContentContainer>
       </Article>
       <Article>
