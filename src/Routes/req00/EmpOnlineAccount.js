@@ -157,6 +157,7 @@ const Req08 = () => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
+        setMode("read");
       } else {
         alert("잠시 후 다시 시도해 주세요");
       }
@@ -186,16 +187,14 @@ const Req08 = () => {
               data.map((item, index) => {
                 if ((index >= (page - 1) * 8) & (index < page * 8)) {
                   return (
-                    <ListItem>
-                      <ListItemSpan
-                        onClick={() => {
-                          setMode("update");
-                          emp_auth_id.setValue(item.emp_auth_id);
-                          setCurrent(item);
-                        }}
-                      >
-                        {item.emp_no}
-                      </ListItemSpan>
+                    <ListItem
+                      onClick={() => {
+                        setMode("update");
+                        emp_auth_id.setValue(item.emp_auth_id);
+                        setCurrent(item);
+                      }}
+                    >
+                      <ListItemSpan>{item.emp_no}</ListItemSpan>
                       <ListItemSpan>{item.emp_auth_id}</ListItemSpan>
                       <ListItemSpan>
                         {item.updated_at.split("T")[0]}-

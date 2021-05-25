@@ -220,6 +220,7 @@ const Req08 = () => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
+        setMode("read");
       } else {
         alert("잠시 후 다시 시도해 주세요");
       }
@@ -263,25 +264,21 @@ const Req08 = () => {
               data.map((item, index) => {
                 if ((index >= (page - 1) * 8) & (index < page * 8)) {
                   return (
-                    <ListItem>
-                      <ListItemSpan
-                        onClick={() => {
-                          setMode("update");
-                          emp_name.setValue(item.emp_name);
-                          emp_rrn.setValue(item.emp_rrn);
-                          emp_final_edu.setValue(item.emp_final_edu);
-                          emp_rank_no.setValue(item.emp_rank_no);
-                          dept_no.setValue(item.dept_no);
-                          hr_score_history_no.setValue(
-                            item.hr_score_history_no
-                          );
-                          emp_manager_no.setValue(item.emp_manager_no);
-                          salary.setValue(item.salary);
-                          setCurrent(item);
-                        }}
-                      >
-                        {item.emp_no}
-                      </ListItemSpan>
+                    <ListItem
+                      onClick={() => {
+                        setMode("update");
+                        emp_name.setValue(item.emp_name);
+                        emp_rrn.setValue(item.emp_rrn);
+                        emp_final_edu.setValue(item.emp_final_edu);
+                        emp_rank_no.setValue(item.emp_rank_no);
+                        dept_no.setValue(item.dept_no);
+                        hr_score_history_no.setValue(item.hr_score_history_no);
+                        emp_manager_no.setValue(item.emp_manager_no);
+                        salary.setValue(item.salary);
+                        setCurrent(item);
+                      }}
+                    >
+                      <ListItemSpan>{item.emp_no}</ListItemSpan>
                       <ListItemSpan>{item.emp_name}</ListItemSpan>
                       <ListItemSpan>{item.emp_rrn}</ListItemSpan>
                       <ListItemSpan>{item.emp_final_edu}</ListItemSpan>

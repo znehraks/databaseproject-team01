@@ -192,6 +192,7 @@ const Req08 = () => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
+        setMode("read");
       } else {
         alert("잠시 후 다시 시도해 주세요");
       }
@@ -231,21 +232,19 @@ const Req08 = () => {
               data.map((item, index) => {
                 if ((index >= (page - 1) * 8) & (index < page * 8)) {
                   return (
-                    <ListItem>
-                      <ListItemSpan
-                        onClick={() => {
-                          setMode("update");
-                          project_no.setValue(item.project_no);
-                          emp_no.setValue(item.emp_no);
-                          enter_date.setValue(item.enter_date);
-                          finish_date.setValue(item.finish_date);
-                          finish_reason.setValue(item.finish_reason);
+                    <ListItem
+                      onClick={() => {
+                        setMode("update");
+                        project_no.setValue(item.project_no);
+                        emp_no.setValue(item.emp_no);
+                        enter_date.setValue(item.enter_date);
+                        finish_date.setValue(item.finish_date);
+                        finish_reason.setValue(item.finish_reason);
 
-                          setCurrent(item);
-                        }}
-                      >
-                        {item.project_no}
-                      </ListItemSpan>
+                        setCurrent(item);
+                      }}
+                    >
+                      <ListItemSpan>{item.project_no}</ListItemSpan>
                       <ListItemSpan>{item.emp_no}</ListItemSpan>
                       <ListItemSpan>{item.enter_date}</ListItemSpan>
                       <ListItemSpan>{item.finish_date}</ListItemSpan>

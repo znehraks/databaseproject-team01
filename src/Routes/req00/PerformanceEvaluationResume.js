@@ -185,6 +185,7 @@ const Req08 = () => {
         if (response.status === 200) {
           console.log("no err");
           setTrigger(!trigger);
+          setMode("read");
         } else {
           alert("잠시 후 다시 시도해 주세요");
         }
@@ -231,20 +232,18 @@ updated_at: "2021-05-07T05:39:53.000Z" */}
               data.map((item, index) => {
                 if ((index >= (page - 1) * 8) & (index < page * 8)) {
                   return (
-                    <ListItem>
-                      <ListItemSpan
-                        onClick={() => {
-                          setMode("update");
-                          emp_no.setValue(item.emp_no);
-                          hr_score.setValue(item.hr_score);
-                          hr_change.setValue(0);
-                          updated_at.setValue(item.updated_at);
-                          is_deleted.setValue(item.is_deleted);
-                          setCurrent(item);
-                        }}
-                      >
-                        {item.hr_score_history_no}
-                      </ListItemSpan>
+                    <ListItem
+                      onClick={() => {
+                        setMode("update");
+                        emp_no.setValue(item.emp_no);
+                        hr_score.setValue(item.hr_score);
+                        hr_change.setValue(0);
+                        updated_at.setValue(item.updated_at);
+                        is_deleted.setValue(item.is_deleted);
+                        setCurrent(item);
+                      }}
+                    >
+                      <ListItemSpan>{item.hr_score_history_no}</ListItemSpan>
                       <ListItemSpan>{item.emp_no}</ListItemSpan>
                       <ListItemSpan>{item.hr_change}</ListItemSpan>
                       <ListItemSpan>{item.hr_score}</ListItemSpan>

@@ -112,7 +112,6 @@ const Blank = styled.div`
 const Req08 = () => {
   const [data, setData] = useState();
   const [orderBy, setOrderBy] = useState("recent");
-  const [empNo, setEmpNo] = useState();
   const [page, setPage] = useState(1);
   const search = useInput();
   useEffect(() => {
@@ -131,10 +130,7 @@ const Req08 = () => {
   return (
     <>
       <Wrapper>
-        <SearchContainer>
-          <SearchBar placeholder={"검색어 입력"} {...search}></SearchBar>
-          <SearchSpan>검색</SearchSpan>
-        </SearchContainer>
+        <SearchContainer></SearchContainer>
         <ListContainer>
           <ListItem>
             <ListItemSpan>직원번호</ListItemSpan>
