@@ -145,7 +145,7 @@ const ProjectProceeding = () => {
                 setMode("detail");
               }}
             >
-              프로젝트 별 참여인원 조회
+              행을 누르시면 프로젝트 별 참여인원 조회가 가능합니다.
             </SearchSpan>
           </SearchContainer>
           <ListContainer>

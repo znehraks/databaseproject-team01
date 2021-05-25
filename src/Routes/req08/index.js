@@ -130,7 +130,9 @@ const Req08 = () => {
   return (
     <>
       <Wrapper>
-        <SearchContainer></SearchContainer>
+        <SearchContainer>
+          <SearchSpan>행을 누르시면 정렬 순서를 변경 가능합니다.</SearchSpan>
+        </SearchContainer>
         <ListContainer>
           <ListItem>
             <ListItemSpan>직원번호</ListItemSpan>

@@ -60,13 +60,21 @@ const BurgerComponent = styled(Burger)``;
 const MenuComponent = styled(Menu)``;
 const Header = () => {
   const [open, setOpen] = useState(false);
-
+  const Logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
   // useOnClickOutside(node, () => setOpen(false));
   return (
     <Wrapper>
       <LogoContainer to="/">
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
+      {localStorage.getItem("token") ? (
+        <MenuSpan to="/">김민수님 안녕하세요!</MenuSpan>
+      ) : (
+        <></>
+      )}
       <MenuContainer>
         <MenuSpan to="/AboutUs">직원관리</MenuSpan>
       </MenuContainer>
@@ -79,13 +87,28 @@ const Header = () => {
       <MenuContainer>
         <MenuSpan to="/ResultHistory">직원평가</MenuSpan>
       </MenuContainer>
+      {localStorage.getItem("token") ? (
+        <MenuContainer>
+          <MenuSpan
+            onClick={() => {
+              Logout();
+            }}
+          >
+            로그아웃
+          </MenuSpan>
+        </MenuContainer>
+      ) : (
+        <MenuContainer>
+          <MenuSpan to="/Auth">로그인</MenuSpan>
+        </MenuContainer>
+      )}
       <MenuContainer>
-        <MenuSpan to="/Auth">로그인</MenuSpan>
+        {/* <MenuSpan to="/ResultHistory">직원평가</MenuSpan> */}
       </MenuContainer>
-      <HamburgerContainer>
+      {/* <HamburgerContainer>
         <BurgerComponent open={open} setOpen={setOpen} />
         <MenuComponent open={open} setOpen={setOpen} />
-      </HamburgerContainer>
+      </HamburgerContainer> */}
     </Wrapper>
   );
 };

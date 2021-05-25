@@ -143,8 +143,8 @@ const Req08 = () => {
             {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
             <ListItemSpan>최종학력</ListItemSpan>
             <ListItemSpan>권한등급</ListItemSpan>
-            <ListItemSpan>부서번호</ListItemSpan>
-            <ListItemSpan>인사점수코드</ListItemSpan>
+            <ListItemSpan>부서</ListItemSpan>
+            <ListItemSpan>인사점수</ListItemSpan>
             <ListItemSpan>관리직원번호</ListItemSpan>
             <ListItemSpan>연봉</ListItemSpan>
             <ListItemSpan>수정일자</ListItemSpan>
@@ -158,9 +158,9 @@ const Req08 = () => {
                     <ListItemSpan>{item.emp_name}</ListItemSpan>
                     {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
                     <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
-                    <ListItemSpan>{item.emp_rank_no}</ListItemSpan>
-                    <ListItemSpan>{item.dept_no}</ListItemSpan>
-                    <ListItemSpan>{item.hr_score_history_no}</ListItemSpan>
+                    <ListItemSpan>{item.emp_rank_name}</ListItemSpan>
+                    <ListItemSpan>{item.dept_name}</ListItemSpan>
+                    <ListItemSpan>{item.hr_score}</ListItemSpan>
                     <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
                     <ListItemSpan>{item.salary}</ListItemSpan>
                     <ListItemSpan>

@@ -192,8 +192,10 @@ const Req08 = () => {
           <ListContainer>
             <ListItem>
               <ListItemSpan>직원번호</ListItemSpan>
+              <ListItemSpan>직원이름</ListItemSpan>
               <ListItemSpan>참여 프로젝트번호</ListItemSpan>
-              <ListItemSpan>직무 번호</ListItemSpan>
+              <ListItemSpan flex={2}>참여 프로젝트</ListItemSpan>
+              <ListItemSpan>직무</ListItemSpan>
               <ListItemSpan>수정일자</ListItemSpan>
             </ListItem>
             {data &&
@@ -210,8 +212,10 @@ const Req08 = () => {
                       }}
                     >
                       <ListItemSpan>{item.emp_no}</ListItemSpan>
+                      <ListItemSpan>{item.emp_name}</ListItemSpan>
                       <ListItemSpan>{item.project_no}</ListItemSpan>
-                      <ListItemSpan>{item.role_no}</ListItemSpan>
+                      <ListItemSpan flex={2}>{item.project_name}</ListItemSpan>
+                      <ListItemSpan>{item.role_name}</ListItemSpan>
                       <ListItemSpan>
                         {item.updated_at.split("T")[0]}-
                         {item.updated_at.split("T")[1].split(".")[0]}

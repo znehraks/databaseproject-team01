@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../../components/Hooks/useInput";
 
@@ -61,7 +62,7 @@ const InputBox = styled.input`
     transition-duration: 0.5s;
   }
 `;
-const Button = styled.span`
+const Button = styled(Link)`
   font-size: 1.2vw;
   border: 2px solid black;
   padding: 0.6vw 1vw;
@@ -85,7 +86,10 @@ const Auth = () => {
   const id = useInput("");
   const pwd = useInput("");
   const email = useInput("");
-
+  const Login = () => {
+    localStorage.setItem("token", "fuafseu3812332993!~3443");
+    window.location.href = "/";
+  };
   return (
     <Wrapper>
       {mode === "login" && (
@@ -98,9 +102,15 @@ const Auth = () => {
             </InputItemContainer>
             <InputItemContainer>
               <InputDesc>비밀번호:</InputDesc>
-              <InputBox placeholder={""} {...pwd}></InputBox>
+              <InputBox placeholder={""} type={"password"} {...pwd}></InputBox>
             </InputItemContainer>
-            <Button>확인</Button>
+            <Button
+              onClick={() => {
+                Login();
+              }}
+            >
+              확인
+            </Button>
             <SmallSpan
               onClick={() => {
                 setMode("registration");

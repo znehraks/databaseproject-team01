@@ -164,11 +164,11 @@ const Req08 = () => {
               <ListItemSpan>직원 사수 번호</ListItemSpan>
               <ListItemSpan>직원 사수 이름</ListItemSpan>
               <ListItemSpan>직원 사수 권한등급</ListItemSpan>
-              <ListItemSpan>직원 사수 부서번호</ListItemSpan>
+              <ListItemSpan>직원 사수 부서</ListItemSpan>
               <ListItemSpan>직원 사수의 사수 번호</ListItemSpan>
               <ListItemSpan>직원 사수 연봉</ListItemSpan>
-              <ListItemSpan>사수 참여프로젝트번호</ListItemSpan>
-              <ListItemSpan>사수 참여프로젝트 직무번호</ListItemSpan>
+              <ListItemSpan>사수 참여프로젝트</ListItemSpan>
+              <ListItemSpan>사수 참여프로젝트 직무</ListItemSpan>
             </ListItem>
             {data &&
               data.map((item, index) => {
@@ -185,11 +185,11 @@ const Req08 = () => {
                       <ListItemSpan>{item.manager_no}</ListItemSpan>
                       <ListItemSpan>{item.manager_name}</ListItemSpan>
                       <ListItemSpan>{item.manager_rank_no}</ListItemSpan>
-                      <ListItemSpan>{item.manager_dept_no}</ListItemSpan>
+                      <ListItemSpan>{item.dept_name}</ListItemSpan>
                       <ListItemSpan>{item.manager_manager_no}</ListItemSpan>
                       <ListItemSpan>{item.manager_salary}</ListItemSpan>
-                      <ListItemSpan>{item.project_no}</ListItemSpan>
-                      <ListItemSpan>{item.role_no}</ListItemSpan>
+                      <ListItemSpan>{item.project_name}</ListItemSpan>
+                      <ListItemSpan>{item.role_name}</ListItemSpan>
                     </ListItem>
                   );
                 }

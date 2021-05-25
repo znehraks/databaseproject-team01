@@ -184,14 +184,7 @@ const Req08 = () => {
                 setMode("read");
               }}
             >
-              조회
-            </SearchSpan>
-            <SearchSpan
-              onClick={() => {
-                setMode("insert");
-              }}
-            >
-              해당직원보너스지급
+              행을 누르시면 보너스가 지급됩니다.
             </SearchSpan>
           </SearchContainer>
           <ListContainer>
@@ -207,9 +200,7 @@ const Req08 = () => {
                   return (
                     <ListItem
                       onClick={() => {
-                        setMode("update");
-
-                        setCurrent(item);
+                        updateData();
                       }}
                     >
                       <ListItemSpan>{item.emp_no}</ListItemSpan>

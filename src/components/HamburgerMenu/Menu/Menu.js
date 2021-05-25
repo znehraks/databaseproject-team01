@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
   font-size: 2vw;
 `;
+const Span = styled(Link)``;
 
 const Menu = ({ open, setOpen, ...props }) => {
   const isHidden = open ? true : false;
@@ -28,7 +29,7 @@ const Menu = ({ open, setOpen, ...props }) => {
         {...props}
       >
         <Wrapper>
-          <span>무엇을넣을까요</span>
+          <Span to="/Auth">로그인</Span>
         </Wrapper>
       </StyledMenu>
     </>
