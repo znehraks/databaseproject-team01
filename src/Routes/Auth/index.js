@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Api } from "../../api";
 import useInput from "../../components/Hooks/useInput";
 
 const Wrapper = styled.div`
@@ -86,9 +87,22 @@ const Auth = () => {
   const id = useInput("");
   const pwd = useInput("");
   const email = useInput("");
-  const Login = () => {
-    localStorage.setItem("token", "fuafseu3812332993!~3443");
-    window.location.href = "/";
+  const Login = (emp_auth_id, emp_auth_pwd) => {
+    Api.Login(emp_auth_id, emp_auth_pwd).then((response) => {
+      if (response.data.loginSuccess) {
+        localStorage.setItem("userId", response.data.userId);
+        window.location.href = "/";
+      }
+    });
+  };
+
+  const Signup = (emp_auth_id, emp_auth_pwd) => {
+    Api.Signup(emp_auth_id, emp_auth_pwd).then((response) => {
+      // if (response.status === 200) {
+      setMode("complete");
+      console.log(response);
+      // }
+    });
   };
   return (
     <Wrapper>
@@ -106,7 +120,7 @@ const Auth = () => {
             </InputItemContainer>
             <Button
               onClick={() => {
-                Login();
+                Login(id.value, pwd.value);
               }}
             >
               확인
@@ -131,13 +145,15 @@ const Auth = () => {
             </InputItemContainer>
             <InputItemContainer>
               <InputDesc>비밀번호:</InputDesc>
-              <InputBox placeholder={""} {...pwd}></InputBox>
+              <InputBox placeholder={""} type={"password"} {...pwd}></InputBox>
             </InputItemContainer>
-            <InputItemContainer>
-              <InputDesc>이메일:</InputDesc>
-              <InputBox placeholder={""} {...email}></InputBox>
-            </InputItemContainer>
-            <Button>가입하기</Button>
+            <Button
+              onClick={() => {
+                Signup(id.value, pwd.value);
+              }}
+            >
+              가입하기
+            </Button>
             <SmallSpan
               onClick={() => {
                 setMode("login");
@@ -145,6 +161,14 @@ const Auth = () => {
             >
               이미 회원이신가요?
             </SmallSpan>
+          </InputContainer>
+        </Article>
+      )}
+      {mode === "complete" && (
+        <Article>
+          <InputContainer>
+            <TitleSpan>가입을 축하드립니다.</TitleSpan>
+            <Button to="/">메인으로</Button>
           </InputContainer>
         </Article>
       )}

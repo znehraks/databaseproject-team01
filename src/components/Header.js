@@ -61,7 +61,7 @@ const MenuComponent = styled(Menu)``;
 const Header = () => {
   const [open, setOpen] = useState(false);
   const Logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     window.location.href = "/";
   };
   // useOnClickOutside(node, () => setOpen(false));
@@ -70,8 +70,10 @@ const Header = () => {
       <LogoContainer to="/">
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
-      {localStorage.getItem("token") ? (
-        <MenuSpan to="/">김민수님 안녕하세요!</MenuSpan>
+      {localStorage.getItem("userId") ? (
+        <MenuSpan to="/">
+          {localStorage.getItem("userId")}님 안녕하세요!
+        </MenuSpan>
       ) : (
         <></>
       )}
@@ -87,7 +89,7 @@ const Header = () => {
       <MenuContainer>
         <MenuSpan to="/ResultHistory">직원평가</MenuSpan>
       </MenuContainer>
-      {localStorage.getItem("token") ? (
+      {localStorage.getItem("userId") ? (
         <MenuContainer>
           <MenuSpan
             onClick={() => {
