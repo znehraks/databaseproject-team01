@@ -177,9 +177,9 @@ const Req08 = () => {
       emp_manager_no,
       salary
     ).then((response) => {
+      setTrigger(!trigger);
       if (response.status === 200) {
         console.log("no err");
-        setTrigger(!trigger);
       } else {
         alert("잠시 후 다시 시도해 주세요");
       }
@@ -373,7 +373,6 @@ const Req08 = () => {
                 salary.value,
                 current.emp_no
               );
-              setMode("read");
             }}
           >
             완료
@@ -421,7 +420,6 @@ const Req08 = () => {
                 emp_manager_no.value,
                 salary.value
               );
-              setMode("read");
             }}
           >
             완료
