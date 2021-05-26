@@ -165,7 +165,6 @@ const Req08 = () => {
     emp_final_edu,
     emp_rank_no,
     dept_no,
-    hr_score_history_no,
     emp_manager_no,
     salary
   ) => {
@@ -175,7 +174,6 @@ const Req08 = () => {
       emp_final_edu,
       emp_rank_no,
       dept_no,
-      hr_score_history_no,
       emp_manager_no,
       salary
     ).then((response) => {
@@ -408,7 +406,6 @@ const Req08 = () => {
               직원최종학력 <SearchBar {...emp_final_edu}></SearchBar>
               직원권한등급 <SearchBar {...emp_rank_no}></SearchBar>
               부서번호 <SearchBar {...dept_no}></SearchBar>
-              인사점수내역 <SearchBar {...hr_score_history_no}></SearchBar>
               상사직원번호 <SearchBar {...emp_manager_no}></SearchBar>
               연봉 <SearchBar {...salary}></SearchBar>
             </SearchContainerColumn>

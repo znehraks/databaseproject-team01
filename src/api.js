@@ -66,7 +66,6 @@ export const Api = {
     emp_final_edu,
     emp_rank_no,
     dept_no,
-    hr_score_history_no,
     emp_manager_no,
     salary
   ) =>
@@ -76,7 +75,6 @@ export const Api = {
       emp_final_edu,
       emp_rank_no,
       dept_no,
-      hr_score_history_no,
       emp_manager_no,
       salary,
     }),
