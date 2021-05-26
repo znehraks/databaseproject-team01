@@ -373,6 +373,7 @@ const Req08 = () => {
                 salary.value,
                 current.emp_no
               );
+              setMode("read");
             }}
           >
             완료
@@ -420,6 +421,7 @@ const Req08 = () => {
                 emp_manager_no.value,
                 salary.value
               );
+              setMode("read");
             }}
           >
             완료
