@@ -418,7 +418,6 @@ const Req08 = () => {
                 emp_final_edu.value,
                 emp_rank_no.value,
                 dept_no.value,
-                hr_score_history_no.value,
                 emp_manager_no.value,
                 salary.value
               );
