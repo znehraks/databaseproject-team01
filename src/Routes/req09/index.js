@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
 import useInput from "../../components/Hooks/useInput";
+import NotAllowed from "../../components/NotAllowed";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -116,11 +117,13 @@ const Req08 = () => {
   const [page, setPage] = useState(1);
   const search = useInput();
   useEffect(() => {
-    Api.getEmpInfo().then((response) => {
-      setData(response.data);
-      console.log(response);
-      console.log(response.data);
-    });
+    localStorage.getItem("emp_rank_no") &&
+      Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+      Api.getEmpInfo().then((response) => {
+        setData(response.data);
+        console.log(response);
+        console.log(response.data);
+      });
   }, [orderBy]);
   //   useEffect(() => {
   //     Api.getEmpInfo().then((response) => {
@@ -130,74 +133,79 @@ const Req08 = () => {
   //   }, []);
   return (
     <>
-      <Wrapper>
-        <SearchContainer>
-          <SearchSpan>
-            행을 누르면 해당 직원이 투입된 프로젝트의 PM,PL 열람이 가능합니다.
-          </SearchSpan>
-        </SearchContainer>
-        <ListContainer>
-          <ListItem>
-            <ListItemSpan>직원번호</ListItemSpan>
-            <ListItemSpan>직원이름</ListItemSpan>
-            {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
-            <ListItemSpan>최종학력</ListItemSpan>
-            <ListItemSpan>권한등급</ListItemSpan>
-            <ListItemSpan>부서</ListItemSpan>
-            <ListItemSpan>인사점수</ListItemSpan>
-            <ListItemSpan>관리직원번호</ListItemSpan>
-            <ListItemSpan>연봉</ListItemSpan>
-            <ListItemSpan>수정일자</ListItemSpan>
-          </ListItem>
-          {data &&
-            data.map((item, index) => {
-              if ((index >= (page - 1) * 8) & (index < page * 8)) {
-                return (
-                  <ListItem to={`/ProjectPMPLDetail/${item.emp_no}`}>
-                    <ListItemSpan>{item.emp_no}</ListItemSpan>
-                    <ListItemSpan>{item.emp_name}</ListItemSpan>
-                    {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
-                    <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
-                    <ListItemSpan>{item.emp_rank_name}</ListItemSpan>
-                    <ListItemSpan>{item.dept_name}</ListItemSpan>
-                    <ListItemSpan>{item.hr_score}</ListItemSpan>
-                    <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
-                    <ListItemSpan>{item.salary}</ListItemSpan>
-                    <ListItemSpan>
-                      {item.updated_at.split("T")[0]}-
-                      {item.updated_at.split("T")[1].split(".")[0]}
-                    </ListItemSpan>
-                  </ListItem>
-                );
-              }
-            })}
-        </ListContainer>
-        <ButtonContainer>
-          <Prev
-            onClick={() => {
-              if (page < 2) {
-                alert("첫 번째 페이지 입니다.");
-                return;
-              }
-              setPage(page - 1);
-            }}
-          >
-            이전
-          </Prev>
-          <CurrentPage>{page}</CurrentPage>
-          <Next
-            onClick={() => {
-              if (Math.floor(data.length / 8) + 1 === page) {
-                alert("마지막 페이지 입니다.");
-                return;
-              }
-              setPage(page + 1);
-            }}
-          >
-            다음
-          </Next>
-        </ButtonContainer>
-      </Wrapper>
+      {localStorage.getItem("emp_rank_no") &&
+      Number(localStorage.getItem("emp_rank_no")) <= 2 ? (
+        <Wrapper>
+          <SearchContainer>
+            <SearchSpan>
+              행을 누르면 해당 직원이 투입된 프로젝트의 PM,PL 열람이 가능합니다.
+            </SearchSpan>
+          </SearchContainer>
+          <ListContainer>
+            <ListItem>
+              <ListItemSpan>직원번호</ListItemSpan>
+              <ListItemSpan>직원이름</ListItemSpan>
+              {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
+              <ListItemSpan>최종학력</ListItemSpan>
+              <ListItemSpan>권한등급</ListItemSpan>
+              <ListItemSpan>부서</ListItemSpan>
+              <ListItemSpan>인사점수</ListItemSpan>
+              <ListItemSpan>관리직원번호</ListItemSpan>
+              <ListItemSpan>연봉</ListItemSpan>
+              <ListItemSpan>수정일자</ListItemSpan>
+            </ListItem>
+            {data &&
+              data.map((item, index) => {
+                if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                  return (
+                    <ListItem to={`/ProjectPMPLDetail/${item.emp_no}`}>
+                      <ListItemSpan>{item.emp_no}</ListItemSpan>
+                      <ListItemSpan>{item.emp_name}</ListItemSpan>
+                      {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
+                      <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
+                      <ListItemSpan>{item.emp_rank_name}</ListItemSpan>
+                      <ListItemSpan>{item.dept_name}</ListItemSpan>
+                      <ListItemSpan>{item.hr_score}</ListItemSpan>
+                      <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
+                      <ListItemSpan>{item.salary}</ListItemSpan>
+                      <ListItemSpan>
+                        {item.updated_at.split("T")[0]}-
+                        {item.updated_at.split("T")[1].split(".")[0]}
+                      </ListItemSpan>
+                    </ListItem>
+                  );
+                }
+              })}
+          </ListContainer>
+          <ButtonContainer>
+            <Prev
+              onClick={() => {
+                if (page < 2) {
+                  alert("첫 번째 페이지 입니다.");
+                  return;
+                }
+                setPage(page - 1);
+              }}
+            >
+              이전
+            </Prev>
+            <CurrentPage>{page}</CurrentPage>
+            <Next
+              onClick={() => {
+                if (Math.floor(data.length / 8) + 1 === page) {
+                  alert("마지막 페이지 입니다.");
+                  return;
+                }
+                setPage(page + 1);
+              }}
+            >
+              다음
+            </Next>
+          </ButtonContainer>
+        </Wrapper>
+      ) : (
+        <NotAllowed />
+      )}
     </>
   );
 };

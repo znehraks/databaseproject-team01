@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
 import useInput from "../../components/Hooks/useInput";
+import NotAllowed from "../../components/NotAllowed";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -117,167 +118,178 @@ const ProjectProceeding = () => {
   const search = useInput();
   useEffect(() => {
     if (mode === "main") {
-      Api.getProceedingProjectWithCount().then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      });
+      localStorage.getItem("emp_rank_no") &&
+        Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+        Api.getProceedingProjectWithCount().then((response) => {
+          setData(response.data);
+          console.log(response.data);
+        });
     } else if (mode === "detail") {
-      Api.getProceedingProjectByProjectNo(projectNo).then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      });
+      localStorage.getItem("emp_rank_no") &&
+        Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+        Api.getProceedingProjectByProjectNo(projectNo).then((response) => {
+          setData(response.data);
+          console.log(response.data);
+        });
     }
   }, [mode, projectNo]);
   return (
     <>
-      {mode === "main" && (
-        <Wrapper>
-          <SearchContainer>
-            <SearchSpan
-              onClick={() => {
-                setMode("main");
-              }}
-            >
-              진행중인 프로젝트 열람
-            </SearchSpan>
-            <SearchSpan
-              onClick={() => {
-                setMode("detail");
-              }}
-            >
-              행을 누르시면 프로젝트 별 참여인원 조회가 가능합니다.
-            </SearchSpan>
-          </SearchContainer>
-          <ListContainer>
-            <ListItem>
-              <ListItemSpan>프로젝트번호</ListItemSpan>
-              <ListItemSpan>프로젝트이름</ListItemSpan>
-              <ListItemSpan>투입인원 수</ListItemSpan>
-              <ListItemSpan>수정일자</ListItemSpan>
-            </ListItem>
-            {data &&
-              data.map((item, index) => {
-                if ((index >= (page - 1) * 8) & (index < page * 8)) {
-                  return (
-                    <ListItem
-                      onClick={() => {
-                        setMode("detail");
-                        setProjectNo(item.project_no);
-                      }}
-                    >
-                      <ListItemSpan>{item.project_no}</ListItemSpan>
-                      <ListItemSpan>{item.project_name}</ListItemSpan>
-                      <ListItemSpan>{item.count}</ListItemSpan>
-                      <ListItemSpan>
-                        {item.updated_at.split("T")[0]}-
-                        {item.updated_at.split("T")[1].split(".")[0]}
-                      </ListItemSpan>
-                    </ListItem>
-                  );
-                }
-              })}
-          </ListContainer>
-          <ButtonContainer>
-            <Prev
-              onClick={() => {
-                if (page < 2) {
-                  alert("첫 번째 페이지 입니다.");
-                  return;
-                }
-                setPage(page - 1);
-              }}
-            >
-              이전
-            </Prev>
-            <CurrentPage>{page}</CurrentPage>
-            <Next
-              onClick={() => {
-                if (Math.floor(data.length / 8) + 1 === page) {
-                  alert("마지막 페이지 입니다.");
-                  return;
-                }
-                setPage(page + 1);
-              }}
-            >
-              다음
-            </Next>
-          </ButtonContainer>
-        </Wrapper>
-      )}
-      {mode === "detail" && (
-        <Wrapper>
-          <SearchContainer>
-            <SearchSpan
-              onClick={() => {
-                setMode("main");
-              }}
-            >
-              진행중인 프로젝트 열람
-            </SearchSpan>
-            <SearchSpan
-              onClick={() => {
-                setMode("detail");
-              }}
-            >
-              프로젝트 별 참여인원 조회
-            </SearchSpan>
-          </SearchContainer>
-          <ListContainer>
-            <ListItem>
-              <ListItemSpan>프로젝트번호</ListItemSpan>
-              <ListItemSpan>부서번호</ListItemSpan>
-              <ListItemSpan>부서이름</ListItemSpan>
-              <ListItemSpan>직원번호</ListItemSpan>
-              {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
-              <ListItemSpan>직원이름</ListItemSpan>
-              <ListItemSpan>수정일자</ListItemSpan>
-            </ListItem>
-            {data &&
-              data.map((item, index) => {
-                if ((index >= (page - 1) * 8) & (index < page * 8)) {
-                  return (
-                    <ListItem>
-                      <ListItemSpan>{projectNo}</ListItemSpan>
-                      <ListItemSpan>{item.dept_no}</ListItemSpan>
-                      <ListItemSpan>{item.dept_name}</ListItemSpan>
-                      {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
-                      <ListItemSpan>{item.emp_no}</ListItemSpan>
-                      <ListItemSpan>{item.emp_name}</ListItemSpan>
-                      <ListItemSpan>
-                        {item.updated_at.split("T")[0]}-
-                        {item.updated_at.split("T")[1].split(".")[0]}
-                      </ListItemSpan>
-                    </ListItem>
-                  );
-                }
-              })}
-          </ListContainer>
-          <ButtonContainer>
-            <Prev
-              onClick={() => {
-                if (page < 2) {
-                  alert("첫 번째 페이지 입니다.");
-                  return;
-                }
-                setPage(page - 1);
-              }}
-            >
-              이전
-            </Prev>
-            <CurrentPage>{page}</CurrentPage>
-            <Next
-              onClick={() => {
-                if (Math.floor(data.length / 8) + 1 === page) {
-                  alert("마지막 페이지 입니다.");
-                  return;
-                }
-                setPage(page + 1);
-              }}
-            >
-              다음
-            </Next>
-          </ButtonContainer>
-        </Wrapper>
+      {localStorage.getItem("emp_rank_no") &&
+      Number(localStorage.getItem("emp_rank_no")) <= 2 ? (
+        <>
+          {mode === "main" && (
+            <Wrapper>
+              <SearchContainer>
+                <SearchSpan
+                  onClick={() => {
+                    setMode("main");
+                  }}
+                >
+                  진행중인 프로젝트 열람
+                </SearchSpan>
+                <SearchSpan
+                  onClick={() => {
+                    setMode("detail");
+                  }}
+                >
+                  행을 누르시면 프로젝트 별 참여인원 조회가 가능합니다.
+                </SearchSpan>
+              </SearchContainer>
+              <ListContainer>
+                <ListItem>
+                  <ListItemSpan>프로젝트번호</ListItemSpan>
+                  <ListItemSpan>프로젝트이름</ListItemSpan>
+                  <ListItemSpan>투입인원 수</ListItemSpan>
+                  <ListItemSpan>수정일자</ListItemSpan>
+                </ListItem>
+                {data &&
+                  data.map((item, index) => {
+                    if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                      return (
+                        <ListItem
+                          onClick={() => {
+                            setMode("detail");
+                            setProjectNo(item.project_no);
+                          }}
+                        >
+                          <ListItemSpan>{item.project_no}</ListItemSpan>
+                          <ListItemSpan>{item.project_name}</ListItemSpan>
+                          <ListItemSpan>{item.count}</ListItemSpan>
+                          <ListItemSpan>
+                            {item.updated_at.split("T")[0]}-
+                            {item.updated_at.split("T")[1].split(".")[0]}
+                          </ListItemSpan>
+                        </ListItem>
+                      );
+                    }
+                  })}
+              </ListContainer>
+              <ButtonContainer>
+                <Prev
+                  onClick={() => {
+                    if (page < 2) {
+                      alert("첫 번째 페이지 입니다.");
+                      return;
+                    }
+                    setPage(page - 1);
+                  }}
+                >
+                  이전
+                </Prev>
+                <CurrentPage>{page}</CurrentPage>
+                <Next
+                  onClick={() => {
+                    if (Math.floor(data.length / 8) + 1 === page) {
+                      alert("마지막 페이지 입니다.");
+                      return;
+                    }
+                    setPage(page + 1);
+                  }}
+                >
+                  다음
+                </Next>
+              </ButtonContainer>
+            </Wrapper>
+          )}
+          {mode === "detail" && (
+            <Wrapper>
+              <SearchContainer>
+                <SearchSpan
+                  onClick={() => {
+                    setMode("main");
+                  }}
+                >
+                  진행중인 프로젝트 열람
+                </SearchSpan>
+                <SearchSpan
+                  onClick={() => {
+                    setMode("detail");
+                  }}
+                >
+                  프로젝트 별 참여인원 조회
+                </SearchSpan>
+              </SearchContainer>
+              <ListContainer>
+                <ListItem>
+                  <ListItemSpan>프로젝트번호</ListItemSpan>
+                  <ListItemSpan>부서번호</ListItemSpan>
+                  <ListItemSpan>부서이름</ListItemSpan>
+                  <ListItemSpan>직원번호</ListItemSpan>
+                  {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
+                  <ListItemSpan>직원이름</ListItemSpan>
+                  <ListItemSpan>수정일자</ListItemSpan>
+                </ListItem>
+                {data &&
+                  data.map((item, index) => {
+                    if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                      return (
+                        <ListItem>
+                          <ListItemSpan>{projectNo}</ListItemSpan>
+                          <ListItemSpan>{item.dept_no}</ListItemSpan>
+                          <ListItemSpan>{item.dept_name}</ListItemSpan>
+                          {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
+                          <ListItemSpan>{item.emp_no}</ListItemSpan>
+                          <ListItemSpan>{item.emp_name}</ListItemSpan>
+                          <ListItemSpan>
+                            {item.updated_at.split("T")[0]}-
+                            {item.updated_at.split("T")[1].split(".")[0]}
+                          </ListItemSpan>
+                        </ListItem>
+                      );
+                    }
+                  })}
+              </ListContainer>
+              <ButtonContainer>
+                <Prev
+                  onClick={() => {
+                    if (page < 2) {
+                      alert("첫 번째 페이지 입니다.");
+                      return;
+                    }
+                    setPage(page - 1);
+                  }}
+                >
+                  이전
+                </Prev>
+                <CurrentPage>{page}</CurrentPage>
+                <Next
+                  onClick={() => {
+                    if (Math.floor(data.length / 8) + 1 === page) {
+                      alert("마지막 페이지 입니다.");
+                      return;
+                    }
+                    setPage(page + 1);
+                  }}
+                >
+                  다음
+                </Next>
+              </ButtonContainer>
+            </Wrapper>
+          )}
+        </>
+      ) : (
+        <NotAllowed />
       )}
     </>
   );

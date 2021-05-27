@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  // baseURL: "http://localhost:3002/",
-  baseURL: "https://dbp2021-team1.herokuapp.com/",
+  baseURL: "http://localhost:3002/",
+  // baseURL: "https://dbp2021-team1.herokuapp.com/",
 });
 
 //api 모아두기
@@ -11,11 +11,8 @@ export const Api = {
       emp_auth_id,
       emp_auth_pwd,
     }),
-  Signup: (emp_auth_id, emp_auth_pwd) =>
-    api.post(`api/sign/signup`, {
-      emp_auth_id,
-      emp_auth_pwd,
-    }),
+  Signup: (emp_no, emp_auth_id, emp_auth_pwd) =>
+    api.post(`api/sign/signup`, { emp_no, emp_auth_id, emp_auth_pwd }),
   getEmpInfo: () => api.get(`api/emp`),
   getEmpDetailInfo: (emp_no) => api.get(`api/emp/${emp_no}`),
   getProjectInfo: () => api.get(`api/project`),

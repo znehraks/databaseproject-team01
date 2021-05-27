@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
 import useInput from "../../components/Hooks/useInput";
+import NotAllowed from "../../components/NotAllowed";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -115,100 +116,111 @@ const EmpAdmin = () => {
   const [trigger, setTrigger] = useState(false);
   const search = useInput();
   useEffect(() => {
-    Api.getEmpInfo().then((response) => {
-      setData(response.data);
-      console.log(response.data);
-      setCount(count + 1);
-    });
-    if (count >= 1) {
-      Api.updateSalaryByPER().then((response) => {
-        if (response.status === 200) {
-          Api.getEmpInfo().then((response) => {
-            setData(response.data);
-            console.log(response.data);
-            setCount(count + 1);
-          });
-          console.log("no err");
-        } else {
-          alert("업데이트에 실패했습니다. 다시 시도해주세요.");
-        }
+    localStorage.getItem("emp_rank_no") &&
+      Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+      Api.getEmpInfo().then((response) => {
+        setData(response.data);
+        console.log(response.data);
+        setCount(count + 1);
       });
+    if (count >= 1) {
+      localStorage.getItem("emp_rank_no") &&
+        Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+        Api.updateSalaryByPER().then((response) => {
+          if (response.status === 200) {
+            localStorage.getItem("emp_rank_no") &&
+              Number(localStorage.getItem("emp_rank_no")) <= 2 &&
+              Api.getEmpInfo().then((response) => {
+                setData(response.data);
+                console.log(response.data);
+                setCount(count + 1);
+              });
+            console.log("no err");
+          } else {
+            alert("업데이트에 실패했습니다. 다시 시도해주세요.");
+          }
+        });
     }
   }, [trigger]);
   return (
     <>
-      <Wrapper>
-        <SearchContainer>
-          <SearchSpan
-            onClick={() => {
-              setTrigger(!trigger);
-            }}
-          >
-            이번 분기 연봉을 업데이트 하려면 클릭하세요
-          </SearchSpan>
-        </SearchContainer>
-        <ListContainer>
-          <ListItem>
-            <ListItemSpan>직원번호</ListItemSpan>
-            <ListItemSpan>직원이름</ListItemSpan>
-            {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
-            <ListItemSpan>최종학력</ListItemSpan>
-            <ListItemSpan>권한등급</ListItemSpan>
-            <ListItemSpan>부서번호</ListItemSpan>
-            <ListItemSpan>인사점수코드</ListItemSpan>
-            <ListItemSpan>관리직원번호</ListItemSpan>
-            <ListItemSpan>연봉(만 원)</ListItemSpan>
-            <ListItemSpan>수정일자</ListItemSpan>
-          </ListItem>
-          {data &&
-            data.map((item, index) => {
-              if ((index >= (page - 1) * 8) & (index < page * 8)) {
-                return (
-                  <ListItem to={`/EmpDetailAdmin/${item.emp_no}`}>
-                    <ListItemSpan>{item.emp_no}</ListItemSpan>
-                    <ListItemSpan>{item.emp_name}</ListItemSpan>
-                    {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
-                    <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
-                    <ListItemSpan>{item.emp_rank_no}</ListItemSpan>
-                    <ListItemSpan>{item.dept_no}</ListItemSpan>
-                    <ListItemSpan>{item.hr_score_history_no}</ListItemSpan>
-                    <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
-                    <ListItemSpan>{item.salary}만 원</ListItemSpan>
-                    <ListItemSpan>
-                      {item.updated_at.split("T")[0]}-
-                      {item.updated_at.split("T")[1].split(".")[0]}
-                    </ListItemSpan>
-                  </ListItem>
-                );
-              }
-            })}
-        </ListContainer>
-        <ButtonContainer>
-          <Prev
-            onClick={() => {
-              if (page < 2) {
-                alert("첫 번째 페이지 입니다.");
-                return;
-              }
-              setPage(page - 1);
-            }}
-          >
-            이전
-          </Prev>
-          <CurrentPage>{page}</CurrentPage>
-          <Next
-            onClick={() => {
-              if (Math.floor(data.length / 8) + 1 === page) {
-                alert("마지막 페이지 입니다.");
-                return;
-              }
-              setPage(page + 1);
-            }}
-          >
-            다음
-          </Next>
-        </ButtonContainer>
-      </Wrapper>
+      {localStorage.getItem("emp_rank_no") &&
+      Number(localStorage.getItem("emp_rank_no")) <= 2 ? (
+        <Wrapper>
+          <SearchContainer>
+            <SearchSpan
+              onClick={() => {
+                setTrigger(!trigger);
+              }}
+            >
+              이번 분기 연봉을 업데이트 하려면 클릭하세요
+            </SearchSpan>
+          </SearchContainer>
+          <ListContainer>
+            <ListItem>
+              <ListItemSpan>직원번호</ListItemSpan>
+              <ListItemSpan>직원이름</ListItemSpan>
+              {/* <ListItemSpan>주민등록번호</ListItemSpan> */}
+              <ListItemSpan>최종학력</ListItemSpan>
+              <ListItemSpan>권한등급</ListItemSpan>
+              <ListItemSpan>부서번호</ListItemSpan>
+              <ListItemSpan>인사점수코드</ListItemSpan>
+              <ListItemSpan>관리직원번호</ListItemSpan>
+              <ListItemSpan>연봉(만 원)</ListItemSpan>
+              <ListItemSpan>수정일자</ListItemSpan>
+            </ListItem>
+            {data &&
+              data.map((item, index) => {
+                if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                  return (
+                    <ListItem to={`/EmpDetailAdmin/${item.emp_no}`}>
+                      <ListItemSpan>{item.emp_no}</ListItemSpan>
+                      <ListItemSpan>{item.emp_name}</ListItemSpan>
+                      {/* <ListItemSpan>{item.emp_rrn}</ListItemSpan> */}
+                      <ListItemSpan>{item.emp_final_edu}</ListItemSpan>
+                      <ListItemSpan>{item.emp_rank_no}</ListItemSpan>
+                      <ListItemSpan>{item.dept_no}</ListItemSpan>
+                      <ListItemSpan>{item.hr_score_history_no}</ListItemSpan>
+                      <ListItemSpan>{item.emp_manager_no}</ListItemSpan>
+                      <ListItemSpan>{item.salary}만 원</ListItemSpan>
+                      <ListItemSpan>
+                        {item.updated_at.split("T")[0]}-
+                        {item.updated_at.split("T")[1].split(".")[0]}
+                      </ListItemSpan>
+                    </ListItem>
+                  );
+                }
+              })}
+          </ListContainer>
+          <ButtonContainer>
+            <Prev
+              onClick={() => {
+                if (page < 2) {
+                  alert("첫 번째 페이지 입니다.");
+                  return;
+                }
+                setPage(page - 1);
+              }}
+            >
+              이전
+            </Prev>
+            <CurrentPage>{page}</CurrentPage>
+            <Next
+              onClick={() => {
+                if (Math.floor(data.length / 8) + 1 === page) {
+                  alert("마지막 페이지 입니다.");
+                  return;
+                }
+                setPage(page + 1);
+              }}
+            >
+              다음
+            </Next>
+          </ButtonContainer>
+        </Wrapper>
+      ) : (
+        <NotAllowed />
+      )}
     </>
   );
 };

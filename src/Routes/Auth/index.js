@@ -84,20 +84,23 @@ const SmallSpan = styled.span`
 const Auth = () => {
   const [mode, setMode] = useState("login");
 
+  const no = useInput("");
   const id = useInput("");
   const pwd = useInput("");
   const email = useInput("");
   const Login = (emp_auth_id, emp_auth_pwd) => {
     Api.Login(emp_auth_id, emp_auth_pwd).then((response) => {
-      if (response.data.loginSuccess) {
-        localStorage.setItem("userId", response.data.userId);
+      if (response.data) {
+        console.log(response.data);
+        localStorage.setItem("emp_name", response.data[0].emp_name);
+        localStorage.setItem("emp_rank_no", response.data[0].emp_rank_no);
         window.location.href = "/";
       }
     });
   };
 
-  const Signup = (emp_auth_id, emp_auth_pwd) => {
-    Api.Signup(emp_auth_id, emp_auth_pwd).then((response) => {
+  const Signup = (emp_no, emp_auth_id, emp_auth_pwd) => {
+    Api.Signup(emp_no, emp_auth_id, emp_auth_pwd).then((response) => {
       // if (response.status === 200) {
       setMode("complete");
       console.log(response);
@@ -140,6 +143,8 @@ const Auth = () => {
           <InputContainer>
             <TitleSpan>회원가입</TitleSpan>
             <InputItemContainer>
+              <InputDesc>사원번호: </InputDesc>
+              <InputBox placeholder={""} {...no}></InputBox>
               <InputDesc>아이디: </InputDesc>
               <InputBox placeholder={""} {...id}></InputBox>
             </InputItemContainer>
@@ -149,7 +154,7 @@ const Auth = () => {
             </InputItemContainer>
             <Button
               onClick={() => {
-                Signup(id.value, pwd.value);
+                Signup(no.value, id.value, pwd.value);
               }}
             >
               가입하기
