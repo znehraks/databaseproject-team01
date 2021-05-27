@@ -19,7 +19,7 @@ const Span = styled.span`
 const Footer = () => {
   return (
     <Wrapper>
-      <Span>Copyright© 2021 All rights reserved by DesignC</Span>
+      <Span>Copyright© 2021 All rights reserved by dbp-team01</Span>
     </Wrapper>
   );
 };
