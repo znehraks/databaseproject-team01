@@ -153,8 +153,8 @@ const Req08 = () => {
     }
   }, [trigger, mode]);
 
-  const insertData = (project_no, emp_no, finish_reason) => {
-    Api.addEmpInProject(project_no, emp_no, finish_reason).then((response) => {
+  const insertData = (project_no, emp_no) => {
+    Api.addEmpInProject(project_no, emp_no).then((response) => {
       if (response.status === 200) {
         console.log("no err");
         setTrigger(!trigger);
@@ -349,12 +349,11 @@ const Req08 = () => {
             <SearchContainerColumn>
               프로젝트번호 <SearchBar {...project_no}></SearchBar>
               직원번호 <SearchBar {...emp_no}></SearchBar>
-              직원종료사유 <SearchBar {...finish_reason}></SearchBar>
             </SearchContainerColumn>
           </ListContainer>
           <SubmitButton
             onClick={() => {
-              insertData(project_no.value, emp_no.value, finish_reason.value);
+              insertData(project_no.value, emp_no.value);
               setMode("read");
             }}
           >

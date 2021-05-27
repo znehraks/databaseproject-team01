@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  // baseURL: "http://localhost:3002/",
-  baseURL: "https://dbp2021-team1.herokuapp.com/",
+  baseURL: "http://localhost:3002/",
+  // baseURL: "https://dbp2021-team1.herokuapp.com/",
 });
 
 //api 모아두기
@@ -231,19 +231,10 @@ export const Api = {
   getEmployeeInProjects: () => api.get(`api/req00/employee_in_project`),
 
   //EmployeeInProject -insert
-  addEmpInProject: (
-    project_no,
-    emp_no,
-    enter_date,
-    finish_date,
-    finish_reason
-  ) =>
+  addEmpInProject: (project_no, emp_no) =>
     api.post(`api/req00/employee_in_project/insert`, {
       project_no,
       emp_no,
-      enter_date,
-      finish_date,
-      finish_reason,
     }),
 
   //EmployeeInProject -update
